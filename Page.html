@@ -3,15 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>User Registration</title>
+    <script type="text/css" src = "style.css"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+       /* fieldset{
+    background-color: aqua;
+}*/
+    </style>
 </head>
 <body>
     <fieldset>
         <legend>User Registration</legend>
         <form method = "post">
-            <label>First name</label>
+            <label required>First name*</label>
             <input type = "text" name = "firstName" id ="firstNameId" placeholder="First name">
             <br>
-            <label>Last name</label>
+            <label required>Last name*</label>
             <input type = "text" name = "lastName" id ="lastNameId" placeholder="Last name">
             <br>
             <label>Address</label>
@@ -45,15 +52,71 @@
 
         
             <br>
-            <label>E-Mail</label>
+            <label required>E-Mail*</label>
             <input type = "email" name = "email" id ="emailId" placeholder="username@domainname.extension">
             <br>
-            <label>Password</label>
+            <label required>Password*</label>
             <input type = "password" name = "password" id ="passwordId">
             <br>
             <input type = "submit" value="Register">
     
         </form>
     </fieldset>
+    <br>
+    <br>
+
+    <fieldset>
+        <legend>Registered Users</legend>
+        <table id="tab">
+            <tbody>
+                <tr>
+                    <th>Full name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>E-Mail</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+<script type="text/javascript" src="index.js"></script>
 </body>
 </html>

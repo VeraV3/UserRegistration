@@ -1,0 +1,43 @@
+
+body {
+    background-image: url("img.jpg");
+  }
+
+fieldset{
+    border: 1px groove rgba(182, 36, 36, 0.466);
+    background-color: rgba(233, 101, 78, 0.123);
+    color:brown
+    
+}
+
+form, input, option, optgroup{
+    background-color: antiquewhite;
+    color:brown
+}
+
+
+table{
+    width: 100%;
+}
+
+table, th, td{
+    border: 2px solid rgba(83, 11, 11, 0.363);
+    border-collapse: collapse;
+}
+
+th, td{
+    padding: 15px;
+    text-align: left;
+}
+
+table#tab tr:nth-child(even){
+    background-color: rgba(123, 32, 33, 0);
+}
+table#tab tr:nth-child(odd){
+    background-color: rgba(196, 156, 157, 0.2);
+}
+
+table#tab th{
+    background-color: rgba(235, 42, 45, 0.075);
+    color:white;
+}
