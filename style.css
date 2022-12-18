@@ -1,9 +1,39 @@
 
 body {
     background-image: url("img.jpg");
+    
   }
 
+ #firstRow{
+    position:-webkit-sticky;
+    position: sticky;
+    top:0;
+    color:rgba(182, 36, 36, 0.719);
+    
+ }
+
+ #fs2{
+    height: 300px;
+ }
+
+  input[type=submit] {
+    width: 100%;
+    background-color: rgba(182, 36, 36, 0.336);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: rgba(182, 36, 36, 0.151);
+  }
+  
+
 fieldset{
+    
     border: 1px groove rgba(182, 36, 36, 0.466);
     background-color: rgba(233, 101, 78, 0.123);
     color:brown
@@ -18,7 +48,15 @@ form, input, option, optgroup{
 /*#firstRow{
     position: sticky;
 }*/
+
+
+ 
+ #firstRow {
+    background-color:rgb(211, 21, 21);
+ }
+
 table{
+
     width: 100%;
 }
 
@@ -41,5 +79,6 @@ table#tab tr:nth-child(odd){
 
 table#tab th{
     background-color: rgba(235, 42, 45, 0.075);
-    color:white;
+   /* color:rgba(182, 36, 36, 0.39);*/
+    
 }
