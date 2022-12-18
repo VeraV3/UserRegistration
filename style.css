@@ -9,12 +9,39 @@ body {
     position: sticky;
     top:0;
     color:rgba(182, 36, 36, 0.719);
+    font-size: 18px;
     
  }
+ table#tab ,th#firstRow{
+    font-size: 14px;
+   color: rgba(83, 11, 11, 0.473);
+    
+}
 
  #fs2{
-    height: 300px;
+    height: 200px;
+  
  }
+
+ #fs1{
+    height:300px;
+  
+ }
+ #country{
+    background-color: antiquewhite;
+    color:brown;
+    width: 20%;
+ }
+
+ input[type=text], select, input[type = email], input[type = password] {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
   input[type=submit] {
     width: 100%;
@@ -23,8 +50,7 @@ body {
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
   }
   
   input[type=submit]:hover {
@@ -41,19 +67,11 @@ fieldset{
 }
 
 form, input, option, optgroup{
-    background-color: antiquewhite;
+   /* background-color: antiquewhite;*/
+  /* background-color: rgba(233, 101, 78, 0.123);*/
     color:brown
 }
 
-/*#firstRow{
-    position: sticky;
-}*/
-
-
- 
- #firstRow {
-    background-color:rgb(211, 21, 21);
- }
 
 table{
 
