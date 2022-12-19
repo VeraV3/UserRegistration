@@ -3,6 +3,13 @@ body {
     background-image: url("img.jpg");
     
   }
+  #div1a, #div1aa, #div2a, #div2aa, #div2aaa, #div3a, #div3aa{
+    width: 30%;
+    height: 100%;
+   
+    display: inline-block;
+  }
+
 
  #firstRow{
     position:-webkit-sticky;
@@ -50,7 +57,7 @@ body {
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
-
+    
   }
   
   input[type=submit]:hover {
