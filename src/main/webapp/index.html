@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <fieldset id="fs1">
+        <legend>User Registration</legend>
+        <form id = "form1" method = "get" action="ServletSubmit">
+            <div id="div1a">
+                <label>First name*</label>
+            </div>
+            <div id="div1aa">  
+                <label >Last name*</label>
+            </div>
+            <div id = "div1b">
+                <input type = "text" name = "firstName" id ="firstNameId" placeholder="First name"  required>
+            
+                <input type = "text" name = "lastName" id ="lastNameId" placeholder="Last name"  required>
+            </div>
+            <div id="div2a">
+                <label>Address</label>
+            </div>
+            <div id="div2aa">  
+                <label>City</label>
+            </div>
+            <div id="div2aaa">
+                <label id="labelCountry">Country</label>
+            </div>
+            <div id="div2b">
+                <input type = "text" name = "address" id ="addressId" placeholder="Address">
+            
+                <input type = "text" name = "city" id ="cityId" placeholder = "City">
+                
+
+           
+            
+                <select id="country" name = "country" >
+                    <optgroup label id= "Country" >
+                        <option value ="United States">United States</option>
+                        <option value = "Canada">Canada</option>
+                        <option value = "United Kingdom">United Kingdom</option>
+                        <option value = "France">France</option>
+                        <option value = "Germany">Germany</option>
+                        <option value = "China">China</option>
+                        <option value = "Japan">Japan</option>
+                </optgroup>
+                </select>
+            </div>
+        
+            <div id="div3a">
+                <label >E-Mail*</label>
+            </div>
+            <div id="div3aa">  
+                <label>Password*</label>
+            </div>
+            <div id = div3b>
+                <input type = "email" name = "email" id ="emailId" placeholder="username@domainname.extension"  required>
+                
+                <input type = "password" name = "password" id ="passwordId"  required>
+            </div>
+            <input type = "submit" value="Register">
+    
+        </form>
+    </fieldset>
+    <br>
+    <br>
+
+    <fieldset id = "fs2">
+        <legend>Registered Users</legend>
+        <iframe id = "if" src = "page2.html" title="Iframe" style = " width:100%; height:100%; border:0px">
+        </iframe>
+     
+    </fieldset>
+
+</body>
+
+
+<script src = index1.js></script>
+</html>

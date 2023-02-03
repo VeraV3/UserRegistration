@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="web.xsd"> 
+
+
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <description></description>
+    <servlet-name>ServletSubmit</servlet-name>
+    <servlet-class>servers.ServletSubmit</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletSubmit</servlet-name>
+    <url-pattern>/ServletSubmit</url-pattern>
+  </servlet-mapping>
+ 
+
+</web-app>

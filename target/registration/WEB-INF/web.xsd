@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="web-app">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="display-name" type="xs:string" />
+        <xs:element name="servlet">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="description" />
+              <xs:element name="servlet-name" type="xs:string" />
+              <xs:element name="servlet-class" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="servlet-mapping">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="servlet-name" type="xs:string" />
+              <xs:element name="url-pattern" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
