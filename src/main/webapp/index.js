@@ -16,29 +16,38 @@
     
 
     let usersTable = document.getElementById("tab")
-    if(usersTable!=null){
-        for(let i = 0; i<n; i++){
-            let any = users[i]
-            let tr = document.createElement('tr')
-            usersTable.appendChild(tr)
-            for(let key in users[i]){
-                let th = document.createElement('th')
-                let text = document.createTextNode(users[i][key])
-            
-                if(key=="Action"){
-                    let a = document.createElement('a')
-                    a.href = ""
-                    a.appendChild(text)
-                    th.appendChild(a);
-                }else if(key=="Address"){
-                    let address = document.createElement('address')
-                    address.appendChild(text)
-                    th.appendChild(address)
-                }else{
-                    th.appendChild(text)
+
+    createATable(usersTable, users)
+
+    function createATable(usersTable, users){
+        for(user of users){
+            makeARow(usersTable, user)
+        }
+    }
+
+    function makeARow(usersTable, user){
+        if (usersTable != null) {
+                let tr = document.createElement('tr')
+                usersTable.appendChild(tr)
+                for (let key in user) {
+                    let td = document.createElement('td')
+                    let text = document.createTextNode(user[key])
+
+                    if (key == "Action") {
+                        let a = document.createElement('a')
+                        a.href = ""
+                        a.appendChild(text)
+                        td.appendChild(a);
+                    } else if (key == "Address") {
+                        let address = document.createElement('address')
+                        address.appendChild(text)
+                        td.appendChild(address)
+                    } else {
+                        td.appendChild(text)
+                    }
+
+                    tr.appendChild(td)
                 }
-                
-                tr.appendChild(th)
-            }
+            
         }
     }
