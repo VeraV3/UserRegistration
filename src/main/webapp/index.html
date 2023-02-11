@@ -4,7 +4,28 @@
     <meta charset="UTF-8">
     <title>User Registration</title>
     <link rel="stylesheet" href="style.css">
+    <style>
 
+        #form1{
+            position:relative;
+        }
+
+        #cp{
+            position:absolute;
+            top: 10%;
+            left:61%;
+            width: 33%;
+            height: 70%;
+             z-index: -1;  
+            /* background-color: blue; */
+            
+            background-image: url("./france.jpg");
+            background-size: contain;
+            /* cover  contain */
+            background-repeat: no-repeat;
+            opacity: 0.2; 
+        }
+    </style>
 </head>
 <body>
     <fieldset id="fs1">
@@ -43,7 +64,7 @@
                         <option value ="United States">United States</option>
                         <option value = "Canada">Canada</option>
                         <option value = "United Kingdom">United Kingdom</option>
-                        <option value = "France">France</option>
+                        <option value = "France" selected>France</option>
                         <option value = "Germany">Germany</option>
                         <option value = "China">China</option>
                         <option value = "Japan">Japan</option>
@@ -63,9 +84,12 @@
                 <input type = "password" name = "password" id ="passwordId"  required>
             </div>
             <input type = "submit" value="Register">
-    
+    <div id = "cp"></div>
         </form>
     </fieldset>
+
+
+
     <br>
     <br>
 
