@@ -17,7 +17,6 @@ function fSubmit(ev){
 }
 
 let cp = document.getElementById("cp");
-//let us = document.getElementById("us");
 let country = document.getElementById("country");
 let children = country.children;
 country.addEventListener("click", check);
@@ -32,7 +31,7 @@ function check(){
         cp.style.backgroundPosition = "center center";
     }  else  if(this.value == "France" && this.value!=value){
         cp.style.backgroundImage= 'url("./france.jpg")';
-        cp.style.backgroundPosition = "20% 15%";
+        cp.style.backgroundPosition = "20% 65%";
     }  else  if(this.value == "Germany"&& this.value!=value){
         cp.style.backgroundImage= 'url("./germany.jpg")';
         cp.style.backgroundPosition = "center center";
@@ -50,19 +49,4 @@ function check(){
     value = this.value;
 }
 
-//us.onchange=function(){
-  //  console.log("Radi ko bajagi ova fja")
-    //cp.style.backgroundImage= 'url("./us.jpg")';
-    // document.body.style.backgroundImage = "url('img_tree.png')";
-    // "backgroundImage: url("./france.jpg");"
-    // <input value="Try selecting some text in this element." />
-/* <p id="log"></p> */
-
-    // function logSelection(event) {
-        // const log = document.getElementById('log');
-        // const selection = event.target.value.substring(event.target.selectionStart, event.target.selectionEnd);
-        // log.textContent = `You selected: ${selection}`;
-      
-    // const input = document.querySelector('input');
-    // input.addEventListener('select', logSelection);
 
