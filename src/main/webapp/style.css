@@ -72,6 +72,28 @@ fieldset{
 
 }
 
+#form1{
+  position:relative;
+}
+
+#cp{
+  position:absolute;
+  top: 10%;
+  left:60.5%;
+  width: 39%;
+  height: 67%;
+   z-index: -1;  
+  /* background-color: blue; */
+  
+  background-image: url("./france.jpg");
+  background-size: cover;
+  /* cover  contain */
+  background-repeat: no-repeat;
+  background-position: 20% 15%;
+  /* left right center      top center bottom 0% 0% */
+  opacity: 0.3; 
+}
+
 form, input, option, optgroup{
    /* background-color: antiquewhite;*/
   /* background-color: rgba(233, 101, 78, 0.123);*/
