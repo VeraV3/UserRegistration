@@ -1,29 +1,80 @@
-   
-    let n = 2
-    let users = []
-    
-    let user = {
-        "Full name": "Vera Bogdanic", 
-        "Address": "Vase Carapica 12", 
-        "City" : "Banja Luka",
-        "Country" : "BiH",
-        "E-Mail" : "vera@gmail.com", 
-        "Action" : "delete"
-    }
-    users.push(user)
-    users.push(user)
-    
-    
+    let xhr = new XMLHttpRequest()
+    //TODO promeni putanju
+    xhr.open("GET", "../java/servers/data.xml")
 
+    xhr.addEventListener("readystatechange", function(){
+        switch(xhr.readyState){
+            case XMLHttpRequest.DONE:
+                if(xhr.status==200){
+                    readXML(this)
+                    return
+                }
+                if(xhr.status>=400){
+                    console.log(xhr.status, xhr.statusText)
+                }
+        }
+    })
+
+    xhr.send()
+
+
+    function readXML(xml) {
+       
+        // let a = xmlResp.getElementsByTagName("first_name")[0].childNodes[0].nodeValue;
+
+        let n = 0
+        let users = []
+     
+        var u, i, fn, ln, addr, cit, coun, em, xmlResp, user;
+        xmlResp = xml.responseXML;
+        u = xmlResp.getElementsByTagName('user');
+        for (i = 0; i < u.length; i++) {
+             fn = u[i].children[0].textContent;
+             ln = u[i].children[1].textContent;
+             addr  = u[i].children[2].textContent;
+             cit = u[i].children[3].textContent;
+             coun = u[i].parentNode.attributes.name.nodeValue
+             em =u[i].children[4].textContent;
+             user = {
+                "Full name": fn+ " " + ln, 
+                "Address": addr, 
+                "City" : cit,
+                "Country" : coun,
+                "E-Mail" : em, 
+                "Action" : "delete"
+            }
+
+            users.push(user)
+            n++
+
+            // console.log(fn, ln, addr, cit, coun, em)
+            // console.log("*************************")
+        
+        }
+            
     let usersTable = document.getElementById("tab")
 
     createATable(usersTable, users)
+      
+    }
 
+    
     function createATable(usersTable, users){
         for(user of users){
             makeARow(usersTable, user)
         }
     }
+
+    /*
+    f.onreset(event){
+        let obrisi = window.confirm("Da li ste sigurni da zelite da obrisete?")
+        if(obrisi){
+            window.alert("Obrisano")
+        }else{
+            event.preventDefault()
+        }
+    }
+    */
 
     function makeARow(usersTable, user){
         if (usersTable != null) {
@@ -36,6 +87,7 @@
                     if (key == "Action") {
                         let a = document.createElement('a')
                         a.href = ""
+                        // a.addEventListener("click", delete);
                         a.appendChild(text)
                         td.appendChild(a);
                     } else if (key == "Address") {
