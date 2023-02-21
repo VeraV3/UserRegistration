@@ -33,124 +33,90 @@ public class ServletSubmit extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
 
-    public ServletSubmit() {
-    }
+    public ServletSubmit() {}
     
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
-    /* (non-Javadoc)
-     * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
-    protected void doPost(HttpServletRequest request,
-    HttpServletResponse response){
-        System.out.println("U serveru sam!");
-        
+    protected void doGet(HttpServletRequest request, HttpServletResponse response){
+        System.out.println("U serveru sam! metod doGet");
     }
 
-    public void service(ServletRequest req, ServletResponse res)
-    throws ServletException, IOException
-{
-    res.setContentType("text/html");
-    PrintWriter pw = res.getWriter();
-    pw.println("<h2>uspesno je dodat korisnik</h2>");
-
-    System.out.println("in service");
-    //response.setContentType("text/html"); // Setting the content type to text
-   // PrintWriter out = response.getWriter();
-
-    String firstName = req.getParameter("firstName");
-    String lastName = req.getParameter("lastName");
-    String address = req.getParameter("address");
-    String city= req.getParameter("city");
-    String country = req.getParameter("country");
-    String email = req.getParameter("email");
-    String password = req.getParameter("password");
-    
-   User user = new User(firstName, lastName, address, city, country, email, password);
-   //pw.print("Welcome " + user.toString() ); 
-    
-    // Printing the username
-    
-    //System.out.println(user.toString());
-    //String adresa = System. getProperty("user. dir");
-    //TODO sredi ovu putanju
-    File putanja  = new File("C:\\Users\\Korisnik\\Desktop\\pr2\\UserRegistration\\src\\main\\java\\servers\\data.xml");
-    
-    putanja.setReadable(true);boolean mozeDaSeCita = putanja.canRead();
-   // String putanja1 = putanja.getAbsolutePath();
-    try {
-        ucitaj(user, putanja);
-
-    } catch (Exception e1) {
+    public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException{
         
+        res.setContentType("text/html");
+        //PrintWriter pw = res.getWriter();
+        //pw.println("<h2>uspesno je dodat korisnik</h2>");
+        System.out.println("u serveru sam, u metodu service");
+
+        String firstName = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
+        String address = req.getParameter("address");
+        String city= req.getParameter("city");
+        String country = req.getParameter("country");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
         
-        e1.printStackTrace();
-        System.out.println("IZUZETAK U UCITAVANJU kORISNIKA U FAJL");
-        System.out.println( "adresa xml fajla je " + putanja + "i moze li da se cita "+ mozeDaSeCita );
+        User user = new User(firstName, lastName, address, city, country, email, password);
+
+        //TODO sredi ovu putanju
+        File putanja  = new File("C:\\Users\\Korisnik\\Desktop\\pr2\\UserRegistration\\src\\main\\java\\servers\\data.xml");
+        // String putanja1 = putanja.getAbsolutePath();
+        putanja.setReadable(true);
+
+        try {
+            load(user, putanja);
+        } catch (Exception e1) { 
+            e1.printStackTrace();
+            System.out.println("Exception in puting user to file");
+        }
+
+       // req.getRequestDispatcher("/page1.html").include(req,res);
+        //System.out.println(req.getParameterValues(getServletInfo()));
+        //System.out.println( req.toString());
+
     }
     
-                //pv2.write(user.toString());
-    //req.getRequestDispatcher("/page1.html").include(req,res);
-    //System.out.println(req.getParameterValues(getServletInfo()));
-    //System.out.println( req.toString());
-
-
-    // Printing the username 
-
-   req.getRequestDispatcher("/page1.html").include(req,res);
-//	System.out.println(req.getParameterValues(getServletInfo()));
-    //System.out.println( req.toString());
-}
-/* 
-protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    // TODO Auto-generated method stub
-    doGet(request, response);
-}
-*/
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 
 	
-	  
-static boolean continentExists(Document doc, User user) {
-    NodeList adrese = doc.getElementsByTagName("continent");
-    for(int x = 0; x< adrese.getLength(); x++) {
-        //System.out.println(adrese.item(x).getTextContent());
-        if(adrese.item(x).getTextContent().equals(user.getContinent())) {
-            System.out.println("kontinent vec postoji!!!");
-            return true;	
-        }
-    }
-    return false;
-}
-
-static boolean countryExists(Document doc, User user) {
-    NodeList adrese = doc.getElementsByTagName("country");
-    for(int x = 0; x< adrese.getLength(); x++) {
-        //System.out.println(adrese.item(x).getTextContent());
-        if(adrese.item(x).getTextContent().equals(user.getCountry())) {
-            System.out.println("drzava vec postoji");
-            return true;	
-        }
-    }
-    return false;
-}
-    
-static boolean check(Document doc, User user)
-    {
-        NodeList adrese = doc.getElementsByTagName("email");
+	//TODO obrisi ispis odavde na kraju
+    static boolean continentExists(Document doc, User user) {
+        NodeList adrese = doc.getElementsByTagName("continent");
         for(int x = 0; x< adrese.getLength(); x++) {
-            //System.out.println(adrese.item(x).getTextContent());
-            if(adrese.item(x).getTextContent().equals(user.getEmail())) {
-                System.out.println("email adresa vec postoji!!!");
+            if(adrese.item(x).getTextContent().equals(user.getContinent())) {
+                System.out.println("Continent exists!");
+                return true;	
+            }
+        }
+        System.out.println("Continent doesnt exist!");
+        return false;
+    }
+    //TODO obrisi ispis ovde
+    static boolean countryExists(Document doc, User user) {
+        NodeList adrese = doc.getElementsByTagName("country");
+        for(int x = 0; x< adrese.getLength(); x++) {
+            if(adrese.item(x).getTextContent().equals(user.getCountry())) {
+                System.out.println("drzava vec postoji");
+                return true;	
+            }
+        }
+        System.out.println("Drzava postoji");
+        return false;
+    }
+    
+    static boolean check(Document doc, User user){
+        NodeList addresses = doc.getElementsByTagName("email");
+        for(int x = 0; x< addresses.getLength(); x++) {
+            if(addresses.item(x).getTextContent().equals(user.getEmail())) {
                 return true;	
             }
         }
         return false;
     }
-    
-    
-static Element newLeaf(Document doc, User user){
-        Element noviUser = doc.createElement("user");
+    //TODO obrisati ispis
+    //TODO dodati beline za strukturiranje xml-a
+    static Element newLeaf(Document doc, User user){
+        Element newUser = doc.createElement("user");
         Element nfirst_name = doc.createElement("first_name");
         nfirst_name.setTextContent(user.getFirstName());
         Element nlast_name = doc.createElement("last_name");
@@ -163,97 +129,95 @@ static Element newLeaf(Document doc, User user){
         nemail.setTextContent(user.getEmail());
         Element npassword = doc.createElement("password");
         npassword.setTextContent(user.getPassword());
-        noviUser.appendChild(nfirst_name);
-        noviUser.appendChild(nlast_name);
-        noviUser.appendChild(naddress);
-        noviUser.appendChild(ncity);
-        noviUser.appendChild(nemail);
-        noviUser.appendChild(npassword);
-        return noviUser;
-        
+        newUser.appendChild(nfirst_name);
+        newUser.appendChild(nlast_name);
+        newUser.appendChild(naddress);
+        newUser.appendChild(ncity);
+        newUser.appendChild(nemail);
+        newUser.appendChild(npassword);
+        System.out.println("Novii korisnik je napravljen");
+        return newUser;    
     }
 
     
-    static Element newMiddleNode(Document doc, User user) 
-    {
-        Element novaDrzava = doc.createElement("country");
-        novaDrzava.setAttribute("name", user.getCountry());
-
-        Element noviUser = newLeaf(doc, user);
-    
-        novaDrzava.appendChild(noviUser);
-        return novaDrzava;
-        
-  }
+    static Element newCountryNode(Document doc, User user){
+        Element newCountry = doc.createElement("country");
+        newCountry.setAttribute("name", user.getCountry());
+        Element newUser = newLeaf(doc, user);
+        newCountry.appendChild(newUser);
+        return newCountry;
+    }
   
-    static Element newTopNode(Document doc, User user){
-    Element noviKontinent = doc.createElement("continent"); 
-    noviKontinent.setAttribute("name", user.getContinent());
-    Element novaDrzava = newMiddleNode(doc, user);
-    noviKontinent.appendChild(novaDrzava);
-    return noviKontinent;	
+    static Element newContinentNode(Document doc, User user){
+        Element newContinent = doc.createElement("continent"); 
+        newContinent.setAttribute("name", user.getContinent());
+        Element newCountry = newCountryNode(doc, user);
+        newContinent.appendChild(newCountry);
+        return newContinent;	
     }
-    
-    static void ucitaj(User user, File putanja) throws TransformerFactoryConfigurationError, ParserConfigurationException, SAXException, IOException, TransformerException {
-            DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder domBuilder = domFactory.newDocumentBuilder();
-    
-            Document doc = domBuilder.parse(putanja);
-            
-            Node root = doc.getDocumentElement();
-            
-                
-            boolean indikatorDuplikata = check(doc, user) ;
-            if(indikatorDuplikata==false) {	
-                    NodeList list = root.getChildNodes();
-                    for (int i = 0; i < list.getLength(); i++) {
-                     // System.out.println("1. nivo	" + i);
-                      Node childNode = list.item(i);
-                      if(childNode.getNodeName() == "continent") {
-                           NamedNodeMap nm = childNode.getAttributes();
-                           for (int j = 0; j < nm.getLength(); j++) {
-                               //System.out.println("Prolazim kroz atribute cvora " + i + " i redni broj atributa je " + j);
-                                  Attr node =  (Attr)nm.item(j);
-                                  if(node.getNodeValue().equals(user.getContinent())) {
-                                      NodeList list2 = childNode.getChildNodes();
-                                      for(int k = 0; k<list2.getLength(); k++) {
-                                          //System.out.println("	2. nivo		" + k);
-                                          Node grandchildNode = list2.item(k);
-                                          if(grandchildNode.getNodeName() == "country") {
-                                            NamedNodeMap nm2 = grandchildNode.getAttributes();
-                                            for (int d = 0; d < nm2.getLength(); d++) {
-                                                //	System.out.println("		3. nivo		" + d);
-                                                    Attr node2 =  (Attr)nm2.item(d);
-                                                    if(node2.getNodeValue().equals(user.getCountry())) {
-                                                        Element noviUser = newLeaf(doc, user);
-                                                        grandchildNode.appendChild(noviUser);
-                                                    }
-                                              }
-                                            if(!countryExists(doc, user) && continentExists(doc, user) && !check(doc, user)) {
-                                              System.out.println("Drzava ne postoji, treba da napravim drzavu");
-                                              Element novaDrzava = newMiddleNode(doc, user);
-                                                childNode.appendChild(novaDrzava);
-                                            }
-                                          }
-                                       }
-                                  }
+    //TODO optimizacija
+    static void load(User user, File path) throws TransformerFactoryConfigurationError, ParserConfigurationException, SAXException, IOException, TransformerException {
+        DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder domBuilder = domFactory.newDocumentBuilder();
+        Document doc = domBuilder.parse(path);
+        Node root = doc.getDocumentElement();
+        boolean indikatorDuplikata = check(doc, user) ;
+        if(indikatorDuplikata==false) {	
+            NodeList maybeContinentList = root.getChildNodes();
+            for (int i = 0; i < maybeContinentList.getLength(); i++) {
+                // System.out.println("1. nivo	" + i);
+                Node maybeContinent = maybeContinentList.item(i);
+                if(maybeContinent.getNodeName() == "continent") {
+                    NamedNodeMap nm = maybeContinent.getAttributes();
+                    for (int j = 0; j < nm.getLength(); j++) {
+                        //System.out.println("Prolazim kroz atribute cvora " + i + " i redni broj atributa je " + j);
+                        Attr node =  (Attr)nm.item(j);
+                        if(node.getNodeValue().equals(user.getContinent())) {
+                            NodeList maybeCountryList = maybeContinent.getChildNodes();
+                            for(int k = 0; k<maybeCountryList.getLength(); k++) {
+                                //System.out.println("	2. nivo		" + k);
+                                Node maybeCountry = maybeCountryList.item(k);
+                                if(maybeCountry.getNodeName() == "country") {
+                                    NamedNodeMap nm2 = maybeCountry.getAttributes();
+                                    for (int d = 0; d < nm2.getLength(); d++) {
+                                        //	System.out.println("		3. nivo		" + d);
+                                        Attr node2 =  (Attr)nm2.item(d);
+                                        if(node2.getNodeValue().equals(user.getCountry())) {
+                                            Element newUser = newLeaf(doc, user);
+                                            maybeCountry.appendChild(newUser);
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                            if(!countryExists(doc, user) && continentExists(doc, user)  ) { //!check(doc, user) &&  u uslovu
+                                 System.out.println("Drzava ne postoji, kontinent postoji, treba da napravim drzavu");
+                                Element newCountry = newCountryNode(doc, user);
+                                maybeContinent.appendChild(newCountry);
+                            }
+                                
+                        }
                                   
-                           }
                     }
-             
-                    }if(!continentExists(doc, user) && !check(doc, user)) {
-                               System.out.println("Kontinent ne postoji, treba da napravim kontinent");
-                                Element noviKontinent = newTopNode(doc, user);
-                                    root.appendChild(noviKontinent);
-                                    
-                           }
                 }
-    
-            Transformer transformer = TransformerFactory.newInstance().newTransformer();
-            File xml = putanja;
-            Result output = new StreamResult(xml); 
-            Source input = new DOMSource(doc);
-            transformer.transform(input, output);
+             
+            }
+            if(!continentExists(doc, user)) { // && !check(doc, user) u uslovu
+                System.out.println("Kontinent ne postoji, treba da napravim kontinent");
+                Element newContinent = newContinentNode(doc, user);
+                root.appendChild(newContinent);
+                                    
+            }
+        }
+        else{
+            System.out.println("User already exists!");
+           
+        }
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        File xml = path;
+        Result output = new StreamResult(xml); 
+        Source input = new DOMSource(doc);
+        transformer.transform(input, output);
     }
 
 }

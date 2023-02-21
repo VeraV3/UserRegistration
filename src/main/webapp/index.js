@@ -76,6 +76,26 @@
     }
     */
 
+    // function deleteRow(event){
+    //     let obrisi = window.confirm("Are you sure you want to delete?")
+    //     if(obrisi){
+    //         console.log(link.getParent)
+    //         window.alert("Deleted!")
+    //     }else{
+    //        // event.preventDefault()
+    //     }
+    // }
+    //TODO dohvatati redove tabele
+    // let links = document.getElementsByTagName("a")
+    // console.log(links)
+    // let linkovi =  Array.from(links)
+    // console.log(linkovi)
+    // for(link of linkovi)
+    //     console.log("ispisujem link: " + link)
+    
+    //link.offsetParent
+    //links.addEventListener("click", deleteRow(this))
+
     function makeARow(usersTable, user){
         if (usersTable != null) {
                 let tr = document.createElement('tr')
@@ -87,7 +107,7 @@
                     if (key == "Action") {
                         let a = document.createElement('a')
                         a.href = ""
-                        // a.addEventListener("click", delete);
+                        //a.addEventListener("click", deleteRow(this));
                         a.appendChild(text)
                         td.appendChild(a);
                     } else if (key == "Address") {

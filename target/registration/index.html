@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <title>User Registration</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href ="./hello.jfif">
+    <style>
 
+        
+     
+
+    </style>
 </head>
 <body>
     <fieldset id="fs1">
@@ -40,13 +46,13 @@
             
                 <select id="country" name = "country" >
                     <optgroup label id= "Country" >
-                        <option value ="United States">United States</option>
-                        <option value = "Canada">Canada</option>
-                        <option value = "United Kingdom">United Kingdom</option>
-                        <option value = "France">France</option>
-                        <option value = "Germany">Germany</option>
-                        <option value = "China">China</option>
-                        <option value = "Japan">Japan</option>
+                        <option id = "us" value ="United States">United States</option>
+                        <option id = "canada" value = "Canada">Canada</option>
+                        <option id ="uk" value = "United Kingdom">United Kingdom</option>
+                        <option id = "france" value = "France" selected>France</option>
+                        <option id = "germany" value = "Germany">Germany</option>
+                        <option id = "china" value = "China">China</option>
+                        <option id = "japan" value = "Japan">Japan</option>
                 </optgroup>
                 </select>
             </div>
@@ -63,9 +69,12 @@
                 <input type = "password" name = "password" id ="passwordId"  required>
             </div>
             <input type = "submit" value="Register">
-    
+    <div id = "cp"></div>
         </form>
     </fieldset>
+
+
+
     <br>
     <br>
 

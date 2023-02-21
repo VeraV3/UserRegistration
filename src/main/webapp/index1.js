@@ -7,13 +7,23 @@ if(form1!=null){
 }
 
 function fSubmit(ev){
-    let name = document.getElementById("firstNameId")
+
+    let field
+    field = document.getElementById("firstNameId")
    
-    if(name==null){
+    if(field==null){
         ev.preventDefault()
-        name.focus()
+        field.focus()
         return;
     }
+    let name  = field.value
+    if(ime === ""){
+        ev.preventDefault()
+        return
+    }
+
+
+
 }
 
 let cp = document.getElementById("cp");
