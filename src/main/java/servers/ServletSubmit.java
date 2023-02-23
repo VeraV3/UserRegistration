@@ -57,7 +57,7 @@ public class ServletSubmit extends HttpServlet{
         User user = new User(firstName, lastName, address, city, country, email, password);
 
         //TODO sredi ovu putanju
-        File putanja  = new File("C:\\Users\\Korisnik\\Desktop\\pr2\\UserRegistration\\src\\main\\java\\servers\\data.xml");
+        File putanja  = new File("C:\\Users\\Korisnik\\Desktop\\URegistration\\UserRegistration\\src\\main\\java\\servers\\data.xml");
         // String putanja1 = putanja.getAbsolutePath();
         putanja.setReadable(true);
 
@@ -81,32 +81,82 @@ public class ServletSubmit extends HttpServlet{
 	
 	//TODO obrisi ispis odavde na kraju
     static boolean continentExists(Document doc, User user) {
-        NodeList adrese = doc.getElementsByTagName("continent");
-        for(int x = 0; x< adrese.getLength(); x++) {
-            if(adrese.item(x).getTextContent().equals(user.getContinent())) {
-                System.out.println("Continent exists!");
-                return true;	
-            }
-        }
-        //System.out.println("Continent doesnt exist!");
+        // NodeList continents = doc.getElementsByTagName("continent");
+        // for(int x = 0; x< continents.getLength(); x++) {
+        //     System.out.println(continents.item(x).getTextContent());
+        //     if(continents.item(x).getTextContent().equals(user.getContinent())) {
+        //         System.out.println("Continent exists!");
+        //         return true;	
+        //     }
+        // }
+        // //System.out.println("Continent doesnt exist!");
+        // return false;
+        Node root = doc.getDocumentElement();
+        NodeList maybeContinentList = root.getChildNodes();
+                for (int i = 0; i < maybeContinentList.getLength(); i++) {
+                // System.out.println("1. nivo	" + i);
+                    Node maybeContinent = maybeContinentList.item(i);
+                    if(maybeContinent.getNodeName() == "continent") {
+                         NamedNodeMap nm = maybeContinent.getAttributes();
+                        for (int j = 0; j < nm.getLength(); j++) {
+                        //System.out.println("Prolazim kroz atribute cvora " + i + " i redni broj atributa je " + j);
+                             Attr node =  (Attr)nm.item(j);
+                            if(node.getNodeValue().equals(user.getContinent())) {
+                                return true;
+                                
+                            }
+                        }
+                    }
+                }
+            
         return false;
+   
     }
     //TODO obrisi ispis ovde
     static boolean countryExists(Document doc, User user) {
-        NodeList adrese = doc.getElementsByTagName("country");
-        for(int x = 0; x< adrese.getLength(); x++) {
-            if(adrese.item(x).getTextContent().equals(user.getCountry())) {
+        NodeList countries = doc.getElementsByTagName("country");
+        for(int x = 0; x< countries.getLength(); x++) {
+            NamedNodeMap nm = countries.item(x).getAttributes();
+            for (int j = 0; j < nm.getLength(); j++) {
+                Attr node =  (Attr)nm.item(j);
+                if(node.getNodeValue().equals(user.getCountry())) {
+            //if(countries.item(x).getTextContent().equals(user.getCountry())) {
                 //System.out.println("drzava vec postoji");
                 return true;	
+                }
             }
-        }
         //System.out.println("Drzava ne postoji");
+        }
         return false;
     }
+        
+        
+        // Node root = doc.getDocumentElement();
+        // NodeList maybeCountryList = root.getChildNodes();
+        //         for (int i = 0; i < maybeCountryList.getLength(); i++) {
+        //         // System.out.println("1. nivo	" + i);
+        //             Node maybeCountry = maybeCountryList.item(i);
+        //             if(maybeCountry.getNodeName() == "country") {
+        //                  NamedNodeMap nm = maybeCountry.getAttributes();
+        //                 for (int j = 0; j < nm.getLength(); j++) {
+        //                 //System.out.println("Prolazim kroz atribute cvora " + i + " i redni broj atributa je " + j);
+        //                      Attr node =  (Attr)nm.item(j);
+        //                     if(node.getNodeValue().equals(user.getCountry())) {
+        //                         return true;
+                                
+        //                     }
+        //                 }
+        //             }
+        //         }
+            
+        // return false;
+   
+                      //  }
     
-    static boolean isDuplicate(Document doc, User user){
+    static boolean isDuplicate(Document doc, User user, PrintWriter pw){
         NodeList addresses = doc.getElementsByTagName("email");
         for(int x = 0; x< addresses.getLength(); x++) {
+            pw.println("<h3>" + addresses.item(x).getTextContent() + "</h3>");
             if(addresses.item(x).getTextContent().equals(user.getEmail())) { 	
                 //System.out.println("Nasla sam istu adresu i ona glasi: " + addresses.item(x).getTextContent());
                 return true;
@@ -183,9 +233,10 @@ public class ServletSubmit extends HttpServlet{
         DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder domBuilder = domFactory.newDocumentBuilder();
         Document doc = domBuilder.parse(path);
+        pw.println("<h4>" +path + "</h4>");
         Node root = doc.getDocumentElement();
        // boolean indikatorDuplikata = check(doc, user) ;
-        if(!isDuplicate(doc, user)) {	
+        if(!isDuplicate(doc, user, pw)) {	
             if(!continentExists(doc, user)) { // && !check(doc, user) u uslovu
                 pw.println("<h2>Kontinent ne postoji, treba da napravim kontinent</h2>");
                 //System.out.println("Kontinent ne postoji, treba da napravim kontinent");
@@ -237,6 +288,11 @@ public class ServletSubmit extends HttpServlet{
              
                 }  
             }
+            Transformer transformer = TransformerFactory.newInstance().newTransformer();
+            File xml = path;
+            Result output = new StreamResult(xml); 
+            Source input = new DOMSource(doc);
+            transformer.transform(input, output);
 
         }
         else{
@@ -248,11 +304,7 @@ public class ServletSubmit extends HttpServlet{
             //System.out.println(user);
            
         }
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        File xml = path;
-        Result output = new StreamResult(xml); 
-        Source input = new DOMSource(doc);
-        transformer.transform(input, output);
+
     }
 
 }
