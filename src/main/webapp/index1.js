@@ -7,7 +7,8 @@ if(form1!=null){
 }
 
 function fSubmit(ev){
-
+    //window.alert("Data sent!")
+    //TODO obavesti korisnika sta se desilo
     let field
     field = document.getElementById("firstNameId")
    

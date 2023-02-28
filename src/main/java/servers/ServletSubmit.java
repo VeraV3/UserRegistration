@@ -43,7 +43,7 @@ public class ServletSubmit extends HttpServlet{
         
         res.setContentType("text/html");
         PrintWriter pw = res.getWriter();
-        pw.println("<h2>u serveru sam, u metodu service</h2>");
+        //pw.println("<h2>u serveru sam, u metodu service</h2>");
         //System.out.println("u serveru sam, u metodu service");
 
         String firstName = req.getParameter("firstName");
@@ -60,15 +60,17 @@ public class ServletSubmit extends HttpServlet{
         File putanja  = new File("C:\\Users\\Korisnik\\Desktop\\URegistration\\UserRegistration\\src\\main\\java\\servers\\data.xml");
         // String putanja1 = putanja.getAbsolutePath();
         putanja.setReadable(true);
-
+        String message ;
         try {
-            load(user, putanja, pw);
+            message = load(user, putanja);
         } catch (Exception e1) { 
             e1.printStackTrace();
             System.out.println("Exception in puting user to file");
+            message = "Exception  in putting user to file";
         }
-
-       // req.getRequestDispatcher("/page1.html").include(req,res);
+        System.out.println(message);
+        //pw.println(message);
+        req.getRequestDispatcher("/index.html").include(req,res);
         //System.out.println(req.getParameterValues(getServletInfo()));
         //System.out.println( req.toString());
 
@@ -81,16 +83,6 @@ public class ServletSubmit extends HttpServlet{
 	
 	//TODO obrisi ispis odavde na kraju
     static boolean continentExists(Document doc, User user) {
-        // NodeList continents = doc.getElementsByTagName("continent");
-        // for(int x = 0; x< continents.getLength(); x++) {
-        //     System.out.println(continents.item(x).getTextContent());
-        //     if(continents.item(x).getTextContent().equals(user.getContinent())) {
-        //         System.out.println("Continent exists!");
-        //         return true;	
-        //     }
-        // }
-        // //System.out.println("Continent doesnt exist!");
-        // return false;
         Node root = doc.getDocumentElement();
         NodeList maybeContinentList = root.getChildNodes();
                 for (int i = 0; i < maybeContinentList.getLength(); i++) {
@@ -120,7 +112,7 @@ public class ServletSubmit extends HttpServlet{
             for (int j = 0; j < nm.getLength(); j++) {
                 Attr node =  (Attr)nm.item(j);
                 if(node.getNodeValue().equals(user.getCountry())) {
-            //if(countries.item(x).getTextContent().equals(user.getCountry())) {
+                //if(countries.item(x).getTextContent().equals(user.getCountry())) {
                 //System.out.println("drzava vec postoji");
                 return true;	
                 }
@@ -131,32 +123,11 @@ public class ServletSubmit extends HttpServlet{
     }
         
         
-        // Node root = doc.getDocumentElement();
-        // NodeList maybeCountryList = root.getChildNodes();
-        //         for (int i = 0; i < maybeCountryList.getLength(); i++) {
-        //         // System.out.println("1. nivo	" + i);
-        //             Node maybeCountry = maybeCountryList.item(i);
-        //             if(maybeCountry.getNodeName() == "country") {
-        //                  NamedNodeMap nm = maybeCountry.getAttributes();
-        //                 for (int j = 0; j < nm.getLength(); j++) {
-        //                 //System.out.println("Prolazim kroz atribute cvora " + i + " i redni broj atributa je " + j);
-        //                      Attr node =  (Attr)nm.item(j);
-        //                     if(node.getNodeValue().equals(user.getCountry())) {
-        //                         return true;
-                                
-        //                     }
-        //                 }
-        //             }
-        //         }
-            
-        // return false;
-   
-                      //  }
     
-    static boolean isDuplicate(Document doc, User user, PrintWriter pw){
+    static boolean isDuplicate(Document doc, User user){
         NodeList addresses = doc.getElementsByTagName("email");
         for(int x = 0; x< addresses.getLength(); x++) {
-            pw.println("<h3>" + addresses.item(x).getTextContent() + "</h3>");
+            //pw.println("<h3>" + addresses.item(x).getTextContent() + "</h3>");
             if(addresses.item(x).getTextContent().equals(user.getEmail())) { 	
                 //System.out.println("Nasla sam istu adresu i ona glasi: " + addresses.item(x).getTextContent());
                 return true;
@@ -229,23 +200,26 @@ public class ServletSubmit extends HttpServlet{
         return newContinent;	
     }
     //TODO optimizacija
-    static void load(User user, File path, PrintWriter pw) throws TransformerFactoryConfigurationError, ParserConfigurationException, SAXException, IOException, TransformerException {
+    static String load(User user, File path) throws TransformerFactoryConfigurationError, ParserConfigurationException, SAXException, IOException, TransformerException {
+        StringBuffer message = null;
         DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder domBuilder = domFactory.newDocumentBuilder();
         Document doc = domBuilder.parse(path);
-        pw.println("<h4>" +path + "</h4>");
+       // pw.println("<h4>" +path + "</h4>");
         Node root = doc.getDocumentElement();
        // boolean indikatorDuplikata = check(doc, user) ;
-        if(!isDuplicate(doc, user, pw)) {	
+        if(!isDuplicate(doc, user)) {	
             if(!continentExists(doc, user)) { // && !check(doc, user) u uslovu
-                pw.println("<h2>Kontinent ne postoji, treba da napravim kontinent</h2>");
+                message = new StringBuffer("Kontinent ne postoji, treba da napravim kontinent");
+                //pw.println("<h2>Kontinent ne postoji, treba da napravim kontinent</h2>");
                 //System.out.println("Kontinent ne postoji, treba da napravim kontinent");
                 Element newContinent = newContinentNode(doc, user);
                 root.appendChild(newContinent);
                                     
             }
             else if(!countryExists(doc, user)) { //!check(doc, user) &&  u uslovu
-                pw.println("<h2>Drzava ne postoji, kontinent postoji, treba da napravim drzavu</h2>");
+                message = new StringBuffer("Drzava ne postoji, treba da napravim novu drzavu");
+                // pw.println("<h2>Drzava ne postoji, kontinent postoji, treba da napravim drzavu</h2>");
 
                //System.out.println("Drzava ne postoji, kontinent postoji, treba da napravim drzavu");
                Element newCountry = newCountryNode(doc, user);
@@ -296,15 +270,16 @@ public class ServletSubmit extends HttpServlet{
 
         }
         else{
-            pw.println("<h2>User already exists!</h2>");
+            message = new StringBuffer("User already exists");
+            //pw.println("<h2>User already exists!</h2>");
 
             //System.out.println("User already exists!");
-            pw.println("<h2>" + user.toString()+ "</h2>");
+            //pw.println("<h2>" + user.toString()+ "</h2>");
 
             //System.out.println(user);
            
         }
-
+        return message.toString();
     }
 
 }
