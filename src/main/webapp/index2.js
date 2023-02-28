@@ -1,6 +1,6 @@
     let xhr = new XMLHttpRequest()
     //TODO promeni putanju
-    xhr.open("GET", "/SendXml")
+    xhr.open("GET", "./InitialData.xml")
 
     xhr.addEventListener("readystatechange", function(){
         switch(xhr.readyState){
