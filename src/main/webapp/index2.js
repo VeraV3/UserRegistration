@@ -1,6 +1,16 @@
     let xhr = new XMLHttpRequest()
     //TODO promeni putanju
-    xhr.open("GET", "./InitialData.xml")
+    xhr.open("GET", "/SendXml") //TODO proveriti treba li ova crtica ovde
+    console.log(xhr.getAllResponseHeaders)
+    console.log(xhr.responseURL)
+
+    // If specified, responseType must be empty string or "document"
+    xhr.responseType = 'document';
+
+    // Force the response to be parsed as XML
+    xhr.overrideMimeType('text/xml');
+
+    //XMLHttpRequest.responseXML Returns a Document containing the response to the request, or null if the request was unsuccessful, has not yet been sent, or cannot be parsed as XML or HT
 
     xhr.addEventListener("readystatechange", function(){
         switch(xhr.readyState){

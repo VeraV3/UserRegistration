@@ -22,11 +22,8 @@
     <servlet-name>ServletSubmit</servlet-name>
     <url-pattern>/ServletSubmit</url-pattern>
   </servlet-mapping>
-
   <servlet-mapping>
     <servlet-name>SendXml</servlet-name>
-    <url-pattern>/SendXml</url-pattern>
+    <url-pattern>/*</url-pattern>
   </servlet-mapping>
- 
-
 </web-app>
