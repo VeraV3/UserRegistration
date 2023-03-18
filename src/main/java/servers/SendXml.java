@@ -51,6 +51,7 @@ public class SendXml extends HttpServlet {
      try{
      
      stream = response.getOutputStream();
+     //TODO prepravi ovu putanju
      File xml = new File("C:\\Users\\Korisnik\\Desktop\\URegistration\\UserRegistration\\src\\main\\java\\servers\\data.xml");
      
       //set response headers

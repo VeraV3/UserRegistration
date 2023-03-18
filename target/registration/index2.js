@@ -1,22 +1,43 @@
     let xhr = new XMLHttpRequest()
+    //xhr.setRequestHeader(Access-Control-Allow-Origin);
     //TODO promeni putanju
-    xhr.open("GET", "/SendXml") //TODO proveriti treba li ova crtica ovde
+    //  xhr.open("GET", "C:\\Users\\Korisnik\\Desktop\\URegistration\\UserRegistration\\src\\main\\java\\servers\\data.xml") 
+    //xhr.open("GET", "https://www.w3schools.com/xml/plant_catalog.xml") 
+
+    //ZA SERVER  i nesto ne radi 
+    xhr.open("GET", "registration/", true) //TODO proveriti treba li ova crtica ovde
     console.log(xhr.getAllResponseHeaders)
     console.log(xhr.responseURL)
+    console.log(xhr.responseText)
 
     // If specified, responseType must be empty string or "document"
     xhr.responseType = 'document';
 
     // Force the response to be parsed as XML
-    xhr.overrideMimeType('text/xml');
+    //xhr.overrideMimeType('text/xml');
 
-    //XMLHttpRequest.responseXML Returns a Document containing the response to the request, or null if the request was unsuccessful, has not yet been sent, or cannot be parsed as XML or HT
+    //XMLHttpRequest.responseXML Returns a Document containing the response to the request, 
+    //or null if the request was unsuccessful, has not yet been sent, or cannot be parsed as XML or HT
+
+    
+    // ﻿
+    // index2.js:41 Uncaught TypeError: Cannot read properties of null (reading 'getElementsByTagName')
+    //     at readXML (index2.js:41:21)
+    //     at XMLHttpRequest.<anonymous> (index2.js:19:21)
 
     xhr.addEventListener("readystatechange", function(){
         switch(xhr.readyState){
             case XMLHttpRequest.DONE:
                 if(xhr.status==200){
+                    //console.log(xhr.responseText)  The value is only accessible if the object's 'responseType' is '' or 'text' (was 'document').
+                    //console.log(xhr.responseXML)  // ovde mi vraca null, zasto?
+                    
+                    if(this!= null){
                     readXML(this)
+                    }
+                    else{
+                        console.log("objekat je null! nije primljen xml kako treba!")
+                    }
                     return
                 }
                 if(xhr.status>=400){
