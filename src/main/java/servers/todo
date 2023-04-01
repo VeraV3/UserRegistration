@@ -1,3 +1,15 @@
-* putanja do data.xml datoteke
-* resiti problem trke za resurse oko te datoteke
-* putanju datoteke lepo izvesti u servletDelete i u SendXml serverima
+
+12* putanju datoteke lepo izvesti u servletDelete i u SendXml serverima
+*** napraviti skrinsotove
+*** napraviti readme fajl
+03* / u pokretanju nekad ima nekad nema i treba rifres
+11* poslati poruku da korisnik postoji
+10* resiti problem trke za resurse oko te datoteke
+09* srediti po folderima resurse sa klijentske strane
+08* pobrisati kontrolne ispise
+07* napraviti stranice za greske
+06* formu ispraviti, dodati kontrolu za ulaz ako se unese prazno no address no city
+05* beline u xml za formatiranje
+04* xml obrisati prazne kontinente i drzave
+02* curenje memorije prijavljuje
+01* probati da saljem preko post
