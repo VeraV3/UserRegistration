@@ -19,12 +19,21 @@
     <servlet-name>SendXml</servlet-name>
     <servlet-class>servers.SendXml</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <servlet-name>ServletDelete</servlet-name>
+    <servlet-class>servers.ServletDelete</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>ServletSubmit</servlet-name>
     <url-pattern>/ServletSubmit</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>SendXml</servlet-name>
-    <url-pattern>/registration/*</url-pattern>
+    <url-pattern>/registration/</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServletDelete</servlet-name>
+    <url-pattern>/ServletDelete</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -1,0 +1,20 @@
+
+* putanju datoteke lepo izvesti u serverima
+* napraviti skrinsotove
+* / u pokretanju nekad ima nekad nema i treba rifres
+* poslati poruku da korisnik postoji
+* resiti problem trke za resurse oko te datoteke
+* pobrisati kontrolne ispise
+* napraviti stranice za greske
+* formu ispraviti, dodati kontrolu za ulaz ako se unese prazno no address no city
+* beline u xml za formatiranje
+* xml obrisati prazne kontinente i drzave
+* probati da saljem preko post 
+
+DONE
+*** organizuj slike u neki direktorijum, srediti po folderima resurse sa klijentske strane
+*** curenje memorije prijavljuje   to je zbog stare verzije tomketa
+*** napraviti readme fajl
+
+beleska:
+System.getProperty("user.dir") radni direktorijum

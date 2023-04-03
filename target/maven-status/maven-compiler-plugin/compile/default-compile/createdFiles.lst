@@ -1,3 +1,4 @@
-servers\ServletSubmit.class
 servers\SendXml.class
+servers\ServletDelete.class
+servers\ServletSubmit.class
 servers\User.class

@@ -1,7 +1,6 @@
 
-* putanju datoteke lepo izvesti u servletDelete i u SendXml serverima
+* putanju datoteke lepo izvesti u serverima
 * napraviti skrinsotove
-* napraviti readme fajl
 * / u pokretanju nekad ima nekad nema i treba rifres
 * poslati poruku da korisnik postoji
 * resiti problem trke za resurse oko te datoteke
@@ -15,6 +14,7 @@
 DONE
 *** organizuj slike u neki direktorijum, srediti po folderima resurse sa klijentske strane
 *** curenje memorije prijavljuje   to je zbog stare verzije tomketa
+*** napraviti readme fajl
 
 beleska:
 System.getProperty("user.dir") radni direktorijum
